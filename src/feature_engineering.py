@@ -14,25 +14,25 @@ class FeatureEngineer:
         df = time_series_df.copy()
         
         # Creating date features
-        df['Year'] = df['Sale_Date'].dt.year
-        df['Month'] = df['Sale_Date'].dt.month
-        df['Day'] = df['Sale_Date'].dt.day
-        df['DayOfWeek'] = df['Sale_Date'].dt.dayofweek
-        df['DayOfYear'] = df['Sale_Date'].dt.dayofyear
-        df['WeekOfYear'] = df['Sale_Date'].dt.isocalendar().week
+        df['Year'] = df['Sale_Date'].dt.year.astype(int)
+        df['Month'] = df['Sale_Date'].dt.month.astype(int)
+        df['Day'] = df['Sale_Date'].dt.day.astype(int)
+        df['DayOfWeek'] = df['Sale_Date'].dt.dayofweek.astype(int)
+        df['DayOfYear'] = df['Sale_Date'].dt.dayofyear.astype(int)
+        df['WeekOfYear'] = df['Sale_Date'].dt.isocalendar().week.astype(int)
         
-        # Create lag features
+        # Creating lag features
         for lag in self.lag_features:
             df[f'Lag_{lag}'] = df['Sales_Amount'].shift(lag)
         
-        # Create rolling statistics
+        # Creating rolling statistics
         for window in self.rolling_windows:
             df[f'Rolling_Mean_{window}'] = df['Sales_Amount'].rolling(window=window).mean()
             df[f'Rolling_Std_{window}'] = df['Sales_Amount'].rolling(window=window).std()
             df[f'Rolling_Min_{window}'] = df['Sales_Amount'].rolling(window=window).min()
             df[f'Rolling_Max_{window}'] = df['Sales_Amount'].rolling(window=window).max()
         
-        # Create difference features
+        # Creating difference features
         df['Diff_1'] = df['Sales_Amount'].diff(1)
         df['Diff_7'] = df['Sales_Amount'].diff(7)
         

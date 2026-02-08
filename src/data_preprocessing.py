@@ -69,4 +69,4 @@ class SalesDataPreprocessor:
             # Overall time series
             df_agg = df.groupby('Sale_Date')[target_col].sum().reset_index()
             return df_agg
-filepath = 'D:\\end to end sales forecasting project\\sales_data.csv'  
+filepath = 'D:\\sales forecasting project\\sales_data.csv'  

@@ -25,7 +25,7 @@ def main():
     
     # Step 1: Loading and preprocessing data
     print("\n1. Loading and preprocessing data...")
-    data_path = "data/sales_data.csv"
+    data_path = "D:\sales forecasting project\sales_data.csv"
     df = preprocessor.load_data(data_path)
     df_processed = preprocessor.preprocess(df)
     
